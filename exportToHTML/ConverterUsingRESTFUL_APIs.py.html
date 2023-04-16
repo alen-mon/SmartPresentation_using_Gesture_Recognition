@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>ConverterUsingRESTFUL_APIs.py</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+
+
+    </style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060">
+    <tr>
+        <td>
+            <center>
+                <font face="Arial, Helvetica" color="#000000">
+                    ConverterUsingRESTFUL_APIs.py</font>
+            </center>
+        </td>
+    </tr>
+</table>
+<pre><span class="s0">import </span><span class="s1">convertapi</span>
+<span class="s0">import </span><span class="s1">os</span>
+<span class="s0">import </span><span class="s1">tempfile</span>
+<span class="s0">import </span><span class="s1">tkinter </span><span class="s0">as </span><span class="s1">tk</span>
+<span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span
+            class="s1">filedialog</span>
+<span class="s0">import </span><span class="s1">os</span>
+
+<span class="s1">root = tk.Tk()</span>
+<span class="s1">root.withdraw()</span>
+<span class="s1">directory = </span><span class="s2">'Presentation'</span>
+<span class="s1">extension = </span><span class="s2">'.png'</span>
+<span class="s1">file_path = filedialog.askopenfilename()</span>
+<span class="s1">convertapi.api_secret = </span><span class="s2">'BH8rIVQUZefbOjgn'</span>
+<span class="s1">convertapi.convert(</span><span class="s2">'png'</span><span class="s0">, </span><span
+            class="s1">{</span>
+    <span class="s2">'File'</span><span class="s1">: file_path</span>
+<span class="s1">}</span><span class="s0">, </span><span class="s1">from_format = </span><span
+            class="s2">'pptx'</span><span class="s1">).save_files(directory)</span>
+
+</pre>
+</body>
+</html>
