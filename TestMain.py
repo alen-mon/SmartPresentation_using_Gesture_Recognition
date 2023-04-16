@@ -155,16 +155,16 @@ def toggle_entry_state():
 
 
 class App:
-    def __init__(self, window, canvass, video_url):
+    def __init__(self, window, canvas, video_url):
         self.window = window
-        self.canvas = canvass
+        self.canvas = canvas
         self.cap = cv2.VideoCapture(video_url)
         self.update()
 
     def update(self):
-        ret, frames = self.cap.read()
+        ret, frame = self.cap.read()
         if ret:
-            cv2image = cv2.cvtColor(frames, cv2.COLOR_BGR2RGB)
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(cv2image)
             self.photo = ImageTk.PhotoImage(image=img)
             self.canvas.create_image(0, 0, image=self.photo, anchor=customtkinter.NW)
