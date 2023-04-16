@@ -12,9 +12,9 @@ IpcameraVariable = ''
 if args[1] == "0":
     IpcameraVariable = 0
 else:
-    IpcameraVariable = "\"" + args[1] + "\""
+    IpcameraVariable = args[1]
     IpcameraVariable = str(IpcameraVariable)
-print(IpcameraVariable)
+print("Camera Feed:" + IpcameraVariable)
 # Parameters
 width, height = 1280, 720
 gestureThreshold = 300
@@ -27,7 +27,8 @@ blueUpper = (140, 255, 255)
 cap = cv2.VideoCapture(IpcameraVariable)
 cap.set(3, width)
 cap.set(4, height)
-
+cv2.namedWindow("FullScreen", cv2.WINDOW_NORMAL)
+cv2.setWindowProperty("FullScreen", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 # Hand Detector
 detectorHand = HandDetector(detectionCon=0.8, maxHands=1)
 
@@ -141,7 +142,7 @@ while True:
         imgnew = cv2.resize(img, (wb, hb))
         imgCurrent[0:hb, w - wb: w] = imgnew
 
-    cv2.imshow("Slides", imgCurrent)
+    cv2.imshow("FullScreen", imgCurrent)
     # cv2.imshow("Image", img)
 
     key = cv2.waitKey(1)

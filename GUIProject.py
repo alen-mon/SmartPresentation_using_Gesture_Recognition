@@ -19,6 +19,7 @@ customtkinter.set_default_color_theme("green")
 
 root = customtkinter.CTk()
 root.geometry("700x600")
+root.title("Smart Gesture Presentation")
 
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=5, padx=15, fill="both", expand=True)
@@ -27,7 +28,7 @@ frame.pack(pady=5, padx=15, fill="both", expand=True)
 def run_script():
     venv_path = 'venv'  # replace with the actual path to your venv
     script_path = 'main.py'  # replace with the actual path to your Python script
-    subprocess.run([f"{venv_path}/Scripts/python", script_path, get_input()])
+    subprocess.run([f"{venv_path}/Scripts/python", 'main.py', get_input()])
 
 
 def upload():
@@ -193,7 +194,7 @@ def get_input():
         return url
     else:
         print("Using device camera")
-        return 0
+        return "0"
 
 
 checked = customtkinter.BooleanVar(value=False)
