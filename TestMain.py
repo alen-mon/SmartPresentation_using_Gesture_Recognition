@@ -1,18 +1,13 @@
-import cv2
-import pyglet
-import requests
-from cvzone.HandTrackingModule import HandDetector
-import os
-import numpy as np
-import time
-from tkinter import StringVar, filedialog
 import subprocess
+from tkinter import filedialog
+
 import customtkinter
+import cv2
+from PIL import Image, ImageTk
+
 from Con_Form_Aspose import cfAspose
 from Con_Form_Inbuilt import cfInbuilt
 from Con_Form_REST_POST import cfRestPost
-from PIL import Image, ImageTk
-import tkinter
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
@@ -56,7 +51,7 @@ def run_selected_function(selected_function):
 def function_1():
     file_path = upload()
     run_button.configure(text="Waiting.....")
-    if (cfRestPost(file_path)):
+    if cfRestPost(file_path):
         print("Option 1 selected" + file_path)
         run_button.configure(text="Success")
 
@@ -64,7 +59,7 @@ def function_1():
 def function_2():
     file_path = upload()
     run_button.configure(text="Waiting.....")
-    if (cfInbuilt(file_path)):
+    if cfInbuilt(file_path):
         print("Option 2 selected" + file_path)
     run_button.configure(text="Success")
 
@@ -72,7 +67,7 @@ def function_2():
 def function_3():
     file_path = upload()
     run_button.configure(text="Waiting.....")
-    if (cfAspose(file_path)):
+    if cfAspose(file_path):
         print("Option 2 selected" + file_path)
         run_button.configure(text="Failed", fg_color="red")
         UploadPath.configure(text_color="red")
@@ -96,13 +91,16 @@ def update_label():
     selected_item = combobox.get()
     if selected_item == "Com_Fom_Rest_Convert":
         label_desc.configure(
-            text=f"ONLINE CONVERTER (Recommended) \nHighly compatible and supports many file formats\nSupports :PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX,\n** Processing times may be longer than other methods **")
+            text=f"ONLINE CONVERTER (Recommended) \nHighly compatible and supports many file formats\nSupports :PDF, "
+                 f"DOC, DOCX, XLS, XLSX, PPT, PPTX,\n** Processing times may be longer than other methods **")
     elif selected_item == "Com_Fom_Aspose":
         label_desc.configure(
-            text=f" OFFLINE LIBRARY , lightweight and fast\n Supports only :PPTX,PPT,PPS,PPA, and ODP \n ** Watermarked if using a free version **")
+            text=f" OFFLINE LIBRARY , lightweight and fast\n Supports only :PPTX,PPT,PPS,PPA, and ODP \n ** "
+                 f"Watermarked if using a free version **")
     elif selected_item == "Com_Fom_Inbuilt":
         label_desc.configure(
-            text=f"INBUILT APPLICATION , Very Fast and Operates Offline \nSupports only :PPTX,PPT\n ** Might fail if the Powerpoint installation is unlicensed or corrupted **")
+            text=f"INBUILT APPLICATION , Very Fast and Operates Offline \nSupports only :PPTX,PPT\n ** Might fail if "
+                 f"the Powerpoint installation is unlicensed or corrupted **")
     root.after(500, update_label)
 
 
@@ -110,7 +108,7 @@ combobox = customtkinter.CTkComboBox(master=frame_reformatter_combo, values=["Co
                                                                              "Com_Fom_Aspose",
                                                                              "Com_Fom_Inbuilt"], width=200)
 combobox.set("Select_Reformatter")
-combobox.bind("<<ComboboxSelected>>", lambda event: update_label(combobox.get()))
+combobox.bind("<<ComboboxSelected>>", lambda event: update_label())
 combobox["state"] = 'readonly'
 combobox.pack(side=customtkinter.LEFT, pady=12, padx=10)
 
@@ -149,7 +147,7 @@ def toggle_entry_state():
                                 placeholder_text="USING DEVICE CAMERA")
         text_input_port.configure(state='disabled', border_color="#454545", placeholder_text_color="#313233")
         Get_INPUT_button.configure(state="disabled", fg_color="#454545")
-        app = App(frame_Arguments, canvas, 0)
+        App(frame_Arguments, canvas, 0)
     else:
         text_input_ip.configure(state='normal', border_color="#808080", placeholder_text_color="#808080")
         text_input_port.configure(state='normal', border_color="#808080", placeholder_text_color="#808080")
@@ -157,16 +155,16 @@ def toggle_entry_state():
 
 
 class App:
-    def __init__(self, window, canvas, video_url):
+    def __init__(self, window, canvass, video_url):
         self.window = window
-        self.canvas = canvas
+        self.canvas = canvass
         self.cap = cv2.VideoCapture(video_url)
         self.update()
 
     def update(self):
-        ret, frame = self.cap.read()
+        ret, frames = self.cap.read()
         if ret:
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            cv2image = cv2.cvtColor(frames, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(cv2image)
             self.photo = ImageTk.PhotoImage(image=img)
             self.canvas.create_image(0, 0, image=self.photo, anchor=customtkinter.NW)
@@ -189,7 +187,8 @@ checkbox.pack(pady=12, padx=10)
 def get_input():
     if checked.get():
         # check if the checkbutton is checked
-        IpcameraVariable = "http://" + text_input_ip.get() + ":" + text_input_port.get() + "/video"  # get the input text from the text widget
+        IpcameraVariable = "http://" + text_input_ip.get() + ":" + text_input_port.get() + "/video"  # get the input
+        # text from the text widget
         print("Input text:", IpcameraVariable)
         return IpcameraVariable
     else:
